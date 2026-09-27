@@ -1,0 +1,247 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    color: #333;
+    background: #f4f6f9;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+button,
+input,
+select {
+    font: inherit;
+}
+
+input,
+select {
+    min-width: 0;
+    padding: 7px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+button {
+    padding: 7px 10px;
+    border: 0;
+    border-radius: 4px;
+    color: #fff;
+    background: #0066cc;
+    cursor: pointer;
+}
+
+.todo-app {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.app-header,
+.filters,
+.add-form,
+.task {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.file-actions {
+    display: flex;
+    gap: 8px;
+    margin: 12px 0;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    clip-path: inset(50%);
+}
+
+.app-header {
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.app-header h1 {
+    font-size: 1.5rem;
+}
+
+.app-header p,
+.settings p {
+    margin: 4px 0;
+    color: #666;
+}
+
+.storage-status {
+    margin: 8px 0 16px;
+    color: #315d39;
+    font-size: 0.85rem;
+}
+
+.add-form input,
+.filters input {
+    flex: 1;
+}
+
+.filters {
+    margin: 12px 0;
+}
+
+.filters select,
+.task select {
+    width: auto;
+}
+
+.task-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.task {
+    margin: 8px 0;
+    padding: 10px;
+    border: 1px solid #e2e6ea;
+    border-radius: 6px;
+    background: #fff;
+}
+
+.task-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.task-text {
+    width: 100%;
+    height: auto;
+    padding: 2px;
+    color: inherit;
+    background: none;
+    font-weight: normal;
+    text-align: left;
+}
+
+.task-tags {
+    display: flex;
+    gap: 8px;
+    color: #526b80;
+    font-size: 0.8rem;
+}
+
+.completed .task-text {
+    opacity: 0.65;
+    text-decoration: line-through;
+}
+
+.task-edit {
+    width: 100%;
+}
+
+.delete {
+    width: auto;
+    padding: 6px 10px;
+    background: #a83232;
+}
+
+.secondary {
+    width: auto;
+    padding: 6px 10px;
+    border: 1px solid #ced4da;
+    color: #333;
+    background: #e9ecef;
+}
+
+.empty-state {
+    padding: 24px 8px;
+    color: #666;
+    text-align: center;
+}
+
+.modal-backdrop {
+    position: fixed;
+    z-index: 10;
+    display: grid;
+    place-items: center;
+    padding: 16px;
+    background: rgb(0 0 0 / 45%);
+    inset: 0;
+}
+
+.settings {
+    width: min(100%, 440px);
+    max-height: 90vh;
+    overflow: auto;
+    padding: 20px;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 8px 32px rgb(0 0 0 / 20%);
+}
+
+.settings h2 {
+    margin-top: 0;
+}
+
+.settings h3 {
+    margin-bottom: 8px;
+}
+
+.settings label {
+    display: block;
+    margin-top: 14px;
+    font-weight: 600;
+}
+
+.settings label input {
+    width: 100%;
+    margin-top: 5px;
+    font-weight: normal;
+}
+
+.settings-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.settings-actions button {
+    flex: 1;
+}
+
+.error {
+    color: #a83232 !important;
+}
+
+@media (max-width: 520px) {
+    .todo-app {
+        padding: 12px;
+    }
+
+    .filters {
+        align-items: stretch;
+        flex-wrap: wrap;
+    }
+
+    .filters input {
+        flex-basis: 100%;
+    }
+
+    .task {
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .task-content {
+        flex-basis: calc(100% - 40px);
+    }
+
+    .task select {
+        margin-left: 26px;
+    }
+}
