@@ -35,9 +35,10 @@ with these fields:
 | `priority` | string or `null` | Optional A–Z priority |
 | `completionDate` | string or `null` | Completion date in `YYYY-MM-DD` form |
 | `creationDate` | string or `null` | Creation date in `YYYY-MM-DD` form |
-| `text` | `Y.Text` | Collaborative task text |
+| `text` | `Y.Text` | Collaborative task description and project/context tags |
 | `projects` | `Y.Array` | Unique project tags |
 | `contexts` | `Y.Array` | Unique context tags |
+| `attributes` | `Y.Map` | Extensible todo.txt `key:value` metadata such as `due:YYYY-MM-DD` |
 
 Text and tag collections use Yjs shared types so concurrent edits can merge.
 Map properties hold completion, priority, and date metadata.
@@ -45,18 +46,37 @@ Map properties hold completion, priority, and date metadata.
 ## Task behavior
 
 The app supports adding, editing, completing, prioritizing, deleting, searching,
-and filtering tasks by project or context. It imports todo.txt files by appending
-non-empty lines (ignoring blank and `#` comment lines) to the current document;
-it does not replace or deduplicate tasks. Export downloads every task regardless
-of active filters.
+and filtering tasks by project or context. Saved filter chips can combine a
+project and context, for example a `Chores at home` chip matching `+chore` and
+`@home`; these filter chips are stored locally in this browser. Tasks are always
+sorted by incomplete before complete, then priority (A–Z; unset last), due date
+(earliest first; unset last), creation date (earliest first), and task text.
+This is a deterministic view derived from the shared fields and does not
+reorder the Yjs array. Comparisons use normalized text and stable identifiers
+as tie-breakers rather than the browser's locale. Each task receives a creation
+date if missing, and completing a task records its completion date. Existing
+completed tasks without a completion date are initialized to the migration
+date. A single click on a task opens its edit dialog, where text, priority, due
+date, projects, and contexts can be changed. Known projects and contexts are
+suggested while typing, and new values can be added directly. Priority badges
+and due dates use color to call attention to higher priorities, overdue tasks,
+and tasks due today.
+
+The settings file section imports and exports todo.txt files. Import-and-add
+appends non-empty lines (ignoring blank and `#` comment lines) without
+deduplicating. Replace-current-tasks asks for confirmation and replaces the
+shared Yjs array (including replacing it with an empty list), syncing that
+change to connected peers. Export downloads every task regardless of active
+filters. Task deletion likewise requires confirmation.
 
 A newly added task receives today's local date when its input does not specify
 a creation date. New task input accepts todo.txt markers: `x` for completion,
 `(A)`–`(Z)` for priority, `YYYY-MM-DD` dates, `+project` tags, and `@context`
 tags.
 
-Editing updates the shared text and re-extracts project and context tags. Tags
-are displayed separately from the task's plain text.
+Editing updates the shared text and project/context Yjs arrays together. Tags
+are displayed separately from the task's plain text. Checkbox completion
+remains available directly in the task row.
 
 ## Development and deployment
 
