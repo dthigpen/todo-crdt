@@ -47,12 +47,6 @@ button {
     gap: 10px;
 }
 
-.file-actions {
-    display: flex;
-    gap: 8px;
-    margin: 12px 0;
-}
-
 .visually-hidden {
     position: absolute;
     width: 1px;
@@ -93,6 +87,100 @@ button {
     margin: 12px 0;
 }
 
+.filter-tools,
+.filter-chips {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin: 10px 0;
+}
+
+.sort-order {
+    color: #526b80;
+    font-size: 0.85rem;
+}
+
+.filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    gap: 8px;
+    margin: 10px 0;
+}
+
+.filter-form label {
+    display: grid;
+    gap: 4px;
+    color: #555;
+    font-size: 0.85rem;
+}
+
+.filter-form input,
+.filter-form select {
+    min-width: 130px;
+}
+
+.filter-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    width: auto;
+    min-height: 34px;
+    padding: 5px 9px;
+    border: 1px solid #b9c6d2;
+    border-radius: 18px;
+    color: #33485b;
+    background: #fff;
+    font-size: 0.9rem;
+}
+
+.filter-chip-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    padding-right: 4px;
+    border: 1px solid #b9c6d2;
+    border-radius: 18px;
+    background: #fff;
+}
+
+.filter-chip-wrap .filter-chip {
+    border: 0;
+}
+
+.filter-chip-wrap.active {
+    border-color: #145fa8;
+    background: #145fa8;
+}
+
+.filter-chip-wrap.active .chip-remove {
+    color: #fff;
+}
+
+.filter-chip.active {
+    border-color: #145fa8;
+    color: #fff;
+    background: #145fa8;
+}
+
+.chip-description {
+    opacity: 0.78;
+    font-size: 0.78rem;
+}
+
+.chip-remove {
+    width: auto;
+    min-height: 24px;
+    padding: 2px 5px;
+    border: 0;
+    border-radius: 50%;
+    color: #526b80;
+    background: transparent;
+    font-size: 1.1rem;
+    line-height: 1;
+}
+
 .filters select,
 .task select {
     width: auto;
@@ -105,42 +193,126 @@ button {
 }
 
 .task {
+    align-items: center;
     margin: 8px 0;
-    padding: 10px;
+    padding: 8px 10px;
     border: 1px solid #e2e6ea;
     border-radius: 6px;
     background: #fff;
 }
 
-.task-content {
+.task-open {
+    display: flex;
     flex: 1;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    min-width: 0;
+    padding: 4px;
+    color: inherit;
+    background: transparent;
+    text-align: left;
+}
+
+.task-open:hover {
+    background: #f5f8fb;
+}
+
+.task-main {
+    display: grid;
+    flex: 1;
+    gap: 6px;
     min-width: 0;
 }
 
 .task-text {
-    width: 100%;
-    height: auto;
-    padding: 2px;
-    color: inherit;
-    background: none;
+    overflow-wrap: anywhere;
     font-weight: normal;
-    text-align: left;
 }
 
 .task-tags {
     display: flex;
+    flex-wrap: wrap;
     gap: 8px;
-    color: #526b80;
     font-size: 0.8rem;
+}
+
+.tag,
+.due-badge,
+.priority-badge {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.78rem;
+}
+
+.project-tag {
+    color: #235b80;
+    background: #e4f2fb;
+}
+
+.context-tag {
+    color: #67418a;
+    background: #f0e8fa;
+}
+
+.attribute-tag {
+    color: #536273;
+    background: #edf0f3;
+}
+
+.priority-badge {
+    flex: none;
+    font-weight: 700;
+}
+
+.priority-A,
+.priority-B {
+    color: #8a2424;
+    background: #fde2e0;
+}
+
+.priority-C,
+.priority-D {
+    color: #80500a;
+    background: #fff0cf;
+}
+
+.priority-E,
+.priority-F {
+    color: #315d39;
+    background: #e1f2e4;
+}
+
+.due-badge {
+    flex: none;
+    color: #33556e;
+    background: #e8f1f8;
+    white-space: nowrap;
+}
+
+.due-overdue {
+    color: #8a2424;
+    background: #fde2e0;
+    font-weight: 700;
+}
+
+.due-today {
+    color: #80500a;
+    background: #fff0cf;
+    font-weight: 700;
+}
+
+.due-done {
+    color: #59636e;
+    background: #edf0f3;
 }
 
 .completed .task-text {
     opacity: 0.65;
     text-decoration: line-through;
-}
-
-.task-edit {
-    width: 100%;
 }
 
 .delete {
@@ -181,6 +353,162 @@ button {
     border-radius: 8px;
     background: #fff;
     box-shadow: 0 8px 32px rgb(0 0 0 / 20%);
+}
+
+.settings-section {
+    margin: 16px 0;
+    padding-top: 12px;
+    border-top: 1px solid #e2e6ea;
+}
+
+.settings-section p {
+    margin: 6px 0 12px;
+    line-height: 1.45;
+}
+
+.settings-section .settings-actions {
+    flex-direction: column;
+}
+
+.settings-section .settings-actions button {
+    flex: none;
+    width: 100%;
+}
+
+.confirm-backdrop {
+    position: fixed;
+    z-index: 30;
+    display: grid;
+    place-items: center;
+    padding: 16px;
+    background: rgb(0 0 0 / 58%);
+    inset: 0;
+}
+
+.confirm-dialog {
+    width: min(100%, 420px);
+    padding: 22px;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 8px 32px rgb(0 0 0 / 24%);
+}
+
+.confirm-dialog h2 {
+    margin: 0 0 10px;
+}
+
+.confirm-dialog p {
+    color: #4e5964;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.confirm-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 18px;
+}
+
+.confirm-actions button {
+    width: auto;
+}
+
+.task-editor {
+    display: grid;
+    gap: 14px;
+    width: min(100%, 560px);
+    max-height: 92vh;
+    overflow: auto;
+    padding: 22px;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 8px 32px rgb(0 0 0 / 20%);
+}
+
+.task-editor h2 {
+    margin: 0;
+}
+
+.editor-field {
+    display: grid;
+    gap: 6px;
+    font-weight: 600;
+}
+
+.task-editor textarea,
+.task-editor select,
+.task-editor input {
+    width: 100%;
+    padding: 9px;
+    border: 1px solid #c8d1da;
+    border-radius: 5px;
+    background: #fff;
+}
+
+.task-editor textarea {
+    resize: vertical;
+}
+
+.editor-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.tag-editor {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    padding: 10px;
+    border: 1px solid #d9e0e6;
+    border-radius: 6px;
+}
+
+.tag-editor legend {
+    padding: 0 5px;
+    font-weight: 600;
+}
+
+.selected-tags,
+.tag-adder,
+.editor-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.selected-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 5px 3px 9px;
+    border-radius: 14px;
+    font-size: 0.85rem;
+}
+
+.selected-tag button {
+    width: auto;
+    padding: 0 4px;
+    color: inherit;
+    background: transparent;
+    font-size: 1.1rem;
+    line-height: 1;
+}
+
+.tag-adder input {
+    flex: 1;
+    min-width: 180px;
+}
+
+.editor-actions {
+    justify-content: flex-end;
+}
+
+.editor-actions button {
+    width: auto;
 }
 
 .settings h2 {
@@ -234,14 +562,17 @@ button {
 
     .task {
         align-items: flex-start;
+    }
+
+    .task-open {
         flex-wrap: wrap;
     }
 
-    .task-content {
-        flex-basis: calc(100% - 40px);
+    .editor-grid {
+        grid-template-columns: 1fr;
     }
 
-    .task select {
-        margin-left: 26px;
+    .task-editor {
+        padding: 16px;
     }
 }

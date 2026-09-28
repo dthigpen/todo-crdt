@@ -1,8 +1,10 @@
-# Todo CRDT
+# Todo
 
 A local-first todo.txt app built with Preact and Yjs. Tasks are persisted in
 this browser with IndexedDB; optional Yjs WebSocket sync can be enabled in the
 app's **Sync settings**.
+
+**[Open the Todo app](https://dthigpen.github.io/todo-crdt/)**
 
 ## Development
 
@@ -13,8 +15,22 @@ npm ci
 npm run dev
 ```
 
-Run the app at the local URL printed by Vite. Run the unit tests with
-`npm test`.
+Vite listens on port `8000` on all laptop network interfaces. Open the local
+URL it prints on the laptop, or from another device on the same trusted network
+open `http://<laptop-LAN-IP>:8000/` (find the laptop's LAN IP in its network
+settings). If the page cannot be reached, allow inbound TCP port 8000 through
+the laptop firewall for the private network. Do not expose the dev server to
+the public internet.
+
+This only serves the app. To sync data between devices, also run a
+`y-websocket` server and connect each device to its address in **Settings →
+Sync settings**. For same-LAN testing, the WebSocket server must bind to a LAN
+interface (for example `HOST=0.0.0.0 PORT=1234 npx --yes y-websocket`), and
+inbound TCP port 1234 must be allowed on the trusted network. Use the laptop's
+LAN IP in the app, such as `ws://<laptop-LAN-IP>:1234`. The stock server is
+unauthenticated; use it only on a trusted network and stop it when finished.
+
+Run the unit tests with `npm test`.
 
 ## Optional WebSocket sync server
 
@@ -63,23 +79,18 @@ document persistence and backup strategy. A random room name or browser-side
 token alone is not access control. Verify the selected server's auth and
 storage behavior before placing data on it.
 
-The app also has **Import** and **Export** actions for todo.txt files.
-Import appends non-empty task lines to the current list; it does not replace or
-deduplicate existing tasks. Export downloads the full list, not only the tasks
-visible under current filters. Imported blank and `#` comment lines are
-ignored.
+The app's **Settings → Todo.txt files** section imports and exports todo.txt
+files. **Import and add** appends non-empty task lines without deduplicating;
+**Replace current tasks** prompts for confirmation before replacing the shared
+list (an empty file can clear the list after confirmation). Export downloads
+the full list, not only tasks visible under current filters. Imported blank and
+`#` comment lines are ignored. Deleting a task also requires confirmation.
 
-## Build and deploy
+## Build locally
 
 ```sh
 npm run build
 npm run preview
 ```
-
-Vite writes a regular multi-file static site to `dist/`, with asset URLs
-configured for `https://<owner>.github.io/todo-crdt/`. The
-[Pages workflow](.github/workflows/pages.yml) deploys `dist/` on pushes to
-`main`. In the repository settings, set **Pages → Build and deployment → Source**
-to **GitHub Actions**.
 
 See [DESIGN.md](DESIGN.md) for the app architecture, data model, and behavior.
